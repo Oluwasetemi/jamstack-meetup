@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "name": "understanding-jamstack-with-real-use-case",
+  "author": "Ojo Oluwasetem<setemiojo@gmail.com>",
+  "license": "ISC",
+  "version": "1.0.1",
+  "scripts": {
+    "start": "mdx-deck deck.mdx",
+    "build": "mdx-deck build deck.mdx",
+    "help": "mdx-deck"
+  },
+  "devDependencies": {
+    "mdx-deck": "^2.3.2"
+  },
+  "keywords": [
+    "gatsby",
+    "jamstacklagos",
+    "freecodecamp"
+  ],
+  "description": "Deck created with mdx-deck for JAMstack Lagos meetup"
+}

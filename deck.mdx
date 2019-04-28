@@ -1,9 +1,9 @@
-import { Head, Notes } from 'mdx-deck'
+import {Head, Notes} from 'mdx-deck'
 
-export { theme } from './theme'
+export {theme} from './theme'
 
 <Head>
-  <title>Understanding JAMstack with REAL use-case</title>
+    <title>Understanding JAMstack with REAL use-case</title>
 </Head>
 
 # Understanding JAMstack with REAL use-case
@@ -12,19 +12,28 @@ export { theme } from './theme'
 
 # Benefits?
 
-Understanding how to use static sites generators(SSG) to create powerful apps that will change the future by <b> understanding the approach others have used via the case study.</b>
+Understanding how to use static sites generators(SSG) to create powerful apps
+that will change the future by <b> understanding the approach others have used
+via the case study.</b>
 
 ---
 
 ## Our Case Study
 
-* [Freecodecamp](https://www.freecodecamp.org/)
-* [Gatsby Swag Store](https://store.gatsbyjs.org/)
-
+-   [Freecodecamp](https://www.freecodecamp.org/)
+-   [Gatsby Swag Store](https://store.gatsbyjs.org/)
 
 ---
 
-[Freecodecamp](https://www.freecodecamp.org/) is a non-profit organization that helps millions of people learn to code every month, and we're doing this using a single API server.
+![Freecodecamp](/fcc.png)
+
+---
+
+# Freecodecamp
+
+[Freecodecamp](https://www.freecodecamp.org/) is a non-profit organization that
+helps millions of people learn to code every month, and we're doing this using a
+single API server.
 
 The rest of the platform is handled by CDNs and other glorious services.
 
@@ -36,49 +45,150 @@ The rest of the platform is handled by CDNs and other glorious services.
 
 ---
 
-Step #1: An open source contributor opens a pull request, changing one of freeCodeCamp.org's 6,000+ interactive coding challenges and reference articles - all of which are stored as easy-to-edit markdown files.
+Step #1: An open source contributor opens a pull request, changing one of
+freeCodeCamp.org's 6,000+ interactive coding challenges and reference articles -
+all of which are stored as easy-to-edit markdown files.
 
-Step #2: Our continuous integration tool confirms that the build passes and Git confirms there aren't any merge conflicts.
+Step #2: Our continuous integration tool confirms that the build passes and Git
+confirms there aren't any merge conflicts.
 
 Step #3: An open source maintainer QA's and merges the pull request on GitHub.
 
-Step #4: Gatsby - a static site builder - turns these 6,000+ markdown files into a single-page React app.
+---
 
-Step #5: Netlify pushes the newly-built app to their CDN endpoints in data centers around the world.
+Step #4: Gatsby - a static site builder - turns these 6,000+ markdown files into
+a single-page React app.
+
+Step #5: Netlify pushes the newly-built app to their CDN endpoints in data
+centers around the world.
+
+Step #6: A person who wants to practice their coding visits
+https://www.freecodecamp.org.
+
+Step #7: Their browser pulls down the files from the nearest Netlify CDN
+endpoint and renders the Gatsby app.
 
 ---
 
-Step #6: A person who wants to practice their coding visits https://www.freecodecamp.org.
+Step #8: Auth0 checks to see whether they are logged into freeCodeCamp.org. If
+they are, it gives them read-write access to our public API - a Node.js /
+Loopback server.
 
-Step #7: Their browser pulls down the files from the nearest Netlify CDN endpoint and renders the Gatsby app.
+Step #9: The API server then reads and writes data from our MongoDB cluster
+hosted on mLab.
 
-Step #8: Auth0 checks to see whether they are logged into freeCodeCamp.org. If they are, it gives them read-write access to our public API - a Node.js / Loopback server.
+Step #10: The browser can now fetch the user's complete freeCodeCamp profile and
+progress. When they complete a coding challenge, their browser can write data
+back to their profile.
 
-Step #9: The API server then reads and writes data from our MongoDB cluster hosted on mLab.
-
-Step #10: The browser can now fetch the user's complete freeCodeCamp profile and progress. When they complete a coding challenge, their browser can write data back to their profile.
-
-NB: [To read more about this step](https://dev.to/ossia/how-freecodecamporg-uses-the-jamstack--a-single-api-server-to-help-millions-of-people-learn-to-code-every-month-4d5g) or watch [Quincy Larson's talk during the first JAMstack conf](https://www.youtube.com/watch?v=e5H7CI3yqPY)
+NB:
+[To read more about this step](https://dev.to/ossia/how-freecodecamporg-uses-the-jamstack--a-single-api-server-to-help-millions-of-people-learn-to-code-every-month-4d5g)
+or watch
+[Quincy Larson's talk during the first JAMstack conf](https://www.youtube.com/watch?v=e5H7CI3yqPY)
 
 ---
 
 ## Let's Analyze The Architecture
 
-Majority of the processes in the Freecodecamp Architecture was going to be handled in the browser.Rendering the markdown file from github.They must be able to track the changes and who made the change.Test cases must run in browser.
+Majority of the processes in the Freecodecamp Architecture was going to be
+handled in the browser.Rendering the markdown file from github.They must be able
+to track the changes and who made the change.Test cases must run in browser.Keep
+each user's progress on the platform.
 
 ---
 
-When a user passes a test, the API endpoint will be communicated to for read and write whatever the user has done.
+When a user completes a challenge, the API endpoint will be communicated to for
+read and write to save whatever the user has done and keep track on each
+challenges the user completed in the curriculum.
 
 NB: they understood the need and perculiarity of their process
 
 ---
 
+# Gatsby Swag Store
+
+[Gatsby Swag Store](https://store.gatsbyjs.org/) is an automated system that
+would identify, manage, and ship swag to Gatsby Maintainers using SaaS like
+GitHub, Peril, GitHub App Dashboard, MailChimp, Shopify and Threadbird
+
+---
+
+# Consideration from the Team that worked on the Project
+
+-   They found out their limitations and Strength
+
+-   Deciding on how to turn Limitation to Strength
+
+-   Scalability was key
+
+-   Process must be repeatable with less human input
+
+-   A Process framework was designed
+
+---
+
+![Gatsby Process](/Swag-Process.png)
+
+---
+
+## Let's take a deeper look at the Process Framework
+
+### GitHub
+
+#### TLDR: Peril
+
+Peril is a hosted instance of Danger. So instead of running on CI, it will run
+on a server somewhere and can respond instantly to webhooks. This gives Danger
+the ability to respond instantly to PR changes, and to run on more than just
+PRs. It was deployed to check if the person assessing the store is a contributor
+or maintainer.
+
+---
+
+## GitHub App Dashboard
+
+It is a service that allows you to build an App using existing Github data to
+give access to your own service. It was used by the swag store to add a coupon
+pulled from shopiify when a collaborator agrees to become a maintainer and share
+email address
+
+## MailChimp
+
+use the mailchimp API to send automated emails
+
+---
+
+## Shopify
+
+Handles the discount code and product you decide to add to your cart
+
+## Threadbird
+
+Shopify directs to this service for customer support, it receives purchase info
+from shopify, fulfil and ship order.
+
+---
+
+## What is all this about still?
+
+> I am not sure I have interest in all this Jargon this guy is talking about.
+
+---
+
+## Wait for It?
+
+The built an ecommerce website with all the modern sweetness. The Largest
+platform to learn coding uses this architecture.
+
+All built with
+
+![JAMstack](https://snipcart.com/media/204206/jamstack.png)
+
+---
+
 To create your presentation
 
-<Notes>
-Create speaker notes with the Notes component
-</Notes>
+<Notes>Create speaker notes with the Notes component</Notes>
 
 ---
 

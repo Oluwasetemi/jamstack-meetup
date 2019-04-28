@@ -16,12 +16,61 @@ Understanding how to use static sites generators(SSG) to create powerful apps th
 
 ---
 
+## Our Case Study
 
-Do you know freecodecamp?
+* [Freecodecamp](https://www.freecodecamp.org/)
+* [Gatsby Swag Store](https://store.gatsbyjs.org/)
+
 
 ---
 
-## Edit this file
+[Freecodecamp](https://www.freecodecamp.org/) is a non-profit organization that helps millions of people learn to code every month, and we're doing this using a single API server.
+
+The rest of the platform is handled by CDNs and other glorious services.
+
+---
+
+## Freecodecamp Architecture
+
+![Freecodecamp Architecture](https://res.cloudinary.com/practicaldev/image/fetch/s--jfZ2uyDW--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/b5xt0zbpinkqamc2gdqv.png)
+
+---
+
+Step #1: An open source contributor opens a pull request, changing one of freeCodeCamp.org's 6,000+ interactive coding challenges and reference articles - all of which are stored as easy-to-edit markdown files.
+
+Step #2: Our continuous integration tool confirms that the build passes and Git confirms there aren't any merge conflicts.
+
+Step #3: An open source maintainer QA's and merges the pull request on GitHub.
+
+Step #4: Gatsby - a static site builder - turns these 6,000+ markdown files into a single-page React app.
+
+Step #5: Netlify pushes the newly-built app to their CDN endpoints in data centers around the world.
+
+---
+
+Step #6: A person who wants to practice their coding visits https://www.freecodecamp.org.
+
+Step #7: Their browser pulls down the files from the nearest Netlify CDN endpoint and renders the Gatsby app.
+
+Step #8: Auth0 checks to see whether they are logged into freeCodeCamp.org. If they are, it gives them read-write access to our public API - a Node.js / Loopback server.
+
+Step #9: The API server then reads and writes data from our MongoDB cluster hosted on mLab.
+
+Step #10: The browser can now fetch the user's complete freeCodeCamp profile and progress. When they complete a coding challenge, their browser can write data back to their profile.
+
+NB: [To read more about this step](https://dev.to/ossia/how-freecodecamporg-uses-the-jamstack--a-single-api-server-to-help-millions-of-people-learn-to-code-every-month-4d5g) or watch [Quincy Larson's talk during the first JAMstack conf](https://www.youtube.com/watch?v=e5H7CI3yqPY)
+
+---
+
+## Let's Analyze The Architecture
+
+Majority of the processes in the Freecodecamp Architecture was going to be handled in the browser.Rendering the markdown file from github.They must be able to track the changes and who made the change.Test cases must run in browser.
+
+---
+
+When a user passes a test, the API endpoint will be communicated to for read and write whatever the user has done.
+
+NB: they understood the need and perculiarity of their process
 
 ---
 
